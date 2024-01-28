@@ -45,11 +45,18 @@ export class SigninComponent implements OnInit {
   }
 
   signUp() {
-    this.signFormData.tasks = [];
-    this.Users.push(this.signFormData);
-    localStorage.setItem('Users', JSON.stringify(this.Users));
-    alert('User register');
-    this.openlogin();
+    var newUser = this.Users.find((x) => x.email == this.signFormData.email);
+
+    if (newUser != null) {
+      alert('User already exist');
+      this.resetSignupForm();
+    } else {
+      this.signFormData.tasks = [];
+      this.Users.push(this.signFormData);
+      localStorage.setItem('Users', JSON.stringify(this.Users));
+      alert('User register');
+      this.openlogin();
+    }
   }
 
   logIn() {
@@ -105,7 +112,10 @@ export class SigninComponent implements OnInit {
   }
 
   resetSignupForm() {
-    this.signForm.reset();
+    this.signFormData.email = '';
+    this.signFormData.name = '';
+    this.signFormData.password = '';
+    this.signFormData.tasks = [];
   }
 }
 

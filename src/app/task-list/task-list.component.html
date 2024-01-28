@@ -1,8 +1,6 @@
 <div class="container">
     <div class="row">
         <div class="task-list col-lg-8">
-           
-
             <div class="container mt-3">
                 <div class="row">
                     <div class="col-12 mb-3 mb-lg-5">
@@ -19,11 +17,12 @@
                                             <th>Description</th>
                                             <th>Date</th>
                                             <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="align-middle" *ngFor="let task of taskList">
-                                            <td> {{task.id}}</td>
+                                        <tr class="align-middle" *ngFor="let task of taskList; index as i">
+                                            <td> {{i+1}}</td>
                                             <td>{{task.taskName}}</td>
                                             <td>{{task.description}}</td>
                                             <td>
@@ -38,6 +37,12 @@
                                                     {{task.status}}
                                                 </span>
                                             </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success"
+                                                    [hidden]="task.status != 'Pending'"><i class="bi bi-check"
+                                                        (click)="CompleteTask(task)"></i></button>
+                                            </td>
+
                                         </tr>
                                     </tbody>
                                 </table>

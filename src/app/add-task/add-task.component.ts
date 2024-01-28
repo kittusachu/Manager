@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../signin/signin.component';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-add-task',
@@ -39,7 +40,7 @@ export class AddTaskComponent implements OnInit {
 
   addTask() {
     const parseTask: Task = this.taskAddObj;
-    parseTask.id = this.taskList.length + 1;
+    parseTask.id = Guid.create().toString();
     // this.taskList.push(parseTask);
     this.Users.find((x) => x.email == this.loginUser.email)?.tasks.push(
       parseTask
@@ -50,7 +51,7 @@ export class AddTaskComponent implements OnInit {
 }
 
 export class Task {
-  id!: number;
+  id!: string;  
   taskName!: string;
   description!: string;
   dueDate!: Date;
