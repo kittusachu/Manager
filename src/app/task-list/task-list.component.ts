@@ -35,4 +35,10 @@ export class TaskListComponent {
     this.taskList.splice(index, 1, task);
     localStorage.setItem('Users', JSON.stringify(this.Users));
   }
+
+  DeleteTask(task: Task) {
+    var index = this.taskList.findIndex((x) => x.id == task.id);
+    this.taskList.splice(index, 1);
+    localStorage.setItem('Users', JSON.stringify(this.Users));
+  }
 }

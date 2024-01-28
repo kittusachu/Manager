@@ -41,7 +41,7 @@ export class AddTaskComponent implements OnInit {
   addTask() {
     const parseTask: Task = this.taskAddObj;
     parseTask.id = Guid.create().toString();
-    // this.taskList.push(parseTask);
+    parseTask.status = 'Pending';
     this.Users.find((x) => x.email == this.loginUser.email)?.tasks.push(
       parseTask
     );
@@ -51,7 +51,7 @@ export class AddTaskComponent implements OnInit {
 }
 
 export class Task {
-  id!: string;  
+  id!: string;
   taskName!: string;
   description!: string;
   dueDate!: Date;

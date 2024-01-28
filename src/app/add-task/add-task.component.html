@@ -1,4 +1,4 @@
-<h3 class="text-center">Add New Task</h3>
+<!-- <h3 class="text-center">Add New Task</h3> -->
 <p class="messege-p"></p>
 <div class="task-add">
     <form>
@@ -17,11 +17,11 @@
             <input type="date" class="form-control" id="id3" placeholder="enter due date" name="duedate"
                 [(ngModel)]="taskAddObj.dueDate">
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="id4">Status </label>
             <input type="text" class="form-control" id="id4" placeholder="enter status " name="status"
                 [(ngModel)]="taskAddObj.status">
-        </div>
+        </div> -->
         <button type="submit" class="btn btn-primary" (click)="addTask()">Add Task</button>
     </form>
 </div>

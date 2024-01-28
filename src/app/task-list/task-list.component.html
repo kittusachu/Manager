@@ -40,7 +40,12 @@
                                             <td>
                                                 <button type="button" class="btn btn-success"
                                                     [hidden]="task.status != 'Pending'"><i class="bi bi-check"
-                                                        (click)="CompleteTask(task)"></i></button>
+                                                        (click)="CompleteTask(task)"></i></button> 
+
+                                                <button type="button" class="btn btn-success"
+                                                    [hidden]="task.status != 'Completed'"><i class="bi-trash"
+                                                        (click)="DeleteTask(task)"></i></button>
+
                                             </td>
 
                                         </tr>
