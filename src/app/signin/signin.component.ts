@@ -45,9 +45,9 @@ export class SigninComponent implements OnInit {
   }
 
   signUp() {
+    this.signFormData.tasks = [];
     this.Users.push(this.signFormData);
     localStorage.setItem('Users', JSON.stringify(this.Users));
-    // this.resetSignupForm();
     alert('User register');
     this.openlogin();
   }
