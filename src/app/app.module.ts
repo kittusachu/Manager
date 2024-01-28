@@ -7,7 +7,8 @@ import { SigninComponent } from './signin/signin.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -15,14 +16,15 @@ import {HttpClientModule} from '@angular/common/http'
     SigninComponent,
     TaskListComponent,
     AddTaskComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
-     AppRoutingModule,
-      FormsModule,
-      HttpClientModule,
-      ReactiveFormsModule
-    ],
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

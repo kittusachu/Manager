@@ -1,60 +1,59 @@
 <div class="seller-auth" *ngIf="!showLogin">
-    <form #signUpForm="ngForm" [formGroup]="signForm" (ngSubmit)="signUp(signUpForm.value)" (ngSubmit)="save()">
+    <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm.value)">
         <h3 class="text-center"> Sign-Up</h3>
         <div class="mb-3">
             <label for="name" class="form-label"> Name</label>
-            <input type="email" class="form-control" id="name" placeholder="enter name" name="name"
-                formControlName="firstName" ngModel />
-            <div *ngIf="firstName.touched && firstName.invalid">
-                <div class="invalid-feedback d-block" *ngIf="firstName.errors?.['required']">
+            <input type="text" class="form-control" id="name" placeholder="enter name" name="name" ngModel />
+            <!-- <div *ngIf="name.touched && name.invalid">
+                <div class="invalid-feedback d-block" *ngIf="name.errors?.['required']">
                     It is required field
                 </div>
-                <div class="invalid-feedback d-block" *ngIf="firstName.errors?.['pattern']">
+                <div class="invalid-feedback d-block" *ngIf="name.errors?.['pattern']">
                     Please enter the valid name
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" placeholder="enter email" name="email"
-                formControlName="email" ngModel />
-            <div *ngIf="email?.touched && email?.invalid">
+                ngModel />
+            <!-- <div *ngIf="email?.touched && email?.invalid">
                 <div class="invalid-feedback d-block" *ngIf="email?.errors?.['required']">
                     It is required field
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="enter password"
                 name="password" ngModel />
-                <div *ngIf="password?.touched && password?.invalid">
-                    <div class="invalid-feedback d-block" *ngIf="password?.errors?.['required']">
-                        It is required field
-                    </div>
-                    </div>
+            <!-- <div *ngIf="password?.touched && password?.invalid">
+                <div class="invalid-feedback d-block" *ngIf="password?.errors?.['required']">
+                    It is required field
+                </div>
+            </div> -->
         </div>
-        <button class="submit" class="btn btn-primary" routerLink="/app-add-task">SignUp</button> <br />
+        <button class="submit" class="btn btn-primary">SignUp</button> <br />
         <a class="auth-toggle-link" (click)="openlogin()">Already Have Account? Click To Login</a>
     </form>
 </div>
 
 <!-- Login Area -->
 <div class="seller-auth" *ngIf="showLogin">
-    <form #loginForm="ngForm" (ngSubmit)="logIn(loginForm.value)" >
+    <form #loginForm="ngForm" (ngSubmit)="logIn(loginForm.value)">
         <h3 class="text-center"> Login</h3>
         <p></p>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" placeholder="enter email" name="email"
                 ngModel />
-                
+
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="enter password"
-                name="password"  ngModel />
-                
+                name="password" ngModel />
+
         </div>
         <button type="submit" class="btn btn-primary">Login</button> <br />
 

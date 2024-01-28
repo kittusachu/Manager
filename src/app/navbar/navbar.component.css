@@ -1,0 +1,8 @@
+.navbar-nav {
+  justify-content: flex-end;
+  float: left;
+}
+
+.nav-item {
+  cursor: pointer;
+}

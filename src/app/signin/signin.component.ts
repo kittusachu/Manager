@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
-// import { AuthGuard } from '../auth.guard';
-// import { UserService } from '../services/user.service';
+import { Task } from '../add-task/add-task.component';
 
 @Component({
   selector: 'app-signin',
@@ -10,23 +9,29 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent implements OnInit {
-  signForm!: FormGroup
- 
-  constructor(
-    private router: Router,
-    
-  ) {}
-  ngOnInit(): void {
-    this.createRegistrationForm();
-  }
-  showLogin: boolean = false;
-  SignUpUsers: any[] = [];
-  signUpForm!: signUp;
-  localData: string | null = '';
+  // signForm!: FormGroup;
+  showLogin: boolean = true;
+  Users: User[] = [];
+  signUpForm!: User;
   dataParse: string | null = '';
-
   LogInUsers: any[] = [];
-  loginForm!: logIn;
+  // loginForm!: FormGroup;
+  loginUser!: User;
+
+  constructor(private router: Router) {
+    var loginData = localStorage.getItem('logInUser');
+    if (loginData) {
+      this.router.navigate(['/app-add-task']);
+    }
+    var localData = localStorage.getItem('Users');
+    if (localData) {
+      this.Users = JSON.parse(localData);
+    }
+  }
+
+  ngOnInit(): void {
+    // this.createRegistrationForm();
+  }
 
   openlogin() {
     this.showLogin = true;
@@ -35,63 +40,68 @@ export class SigninComponent implements OnInit {
   openSignup() {
     this.showLogin = false;
   }
-  signUp(data: signUp) {
-    this.SignUpUsers.push(data);
-    localStorage.setItem('SignUpUsers', JSON.stringify(this.SignUpUsers));
-    this.localData = localStorage.getItem('SignUpUsers');
-    if (this.localData !== null) {
-      this.SignUpUsers = JSON.parse(this.localData);
-      
-    }
+
+  signUp(data: User) {
+    var userData: User = {
+      email: data.email,
+      name: data.name,
+      password: data.password,
+      tasks: [],
+    };
+    this.Users.push(userData);
+    localStorage.setItem('Users', JSON.stringify(this.Users));
+    this.resetSignupForm();
+    this.openlogin();
   }
-  
 
   logIn(data: logIn) {
-    this.LogInUsers.push(data);
-    localStorage.setItem('logInUsers', JSON.stringify(this.LogInUsers));
-    this.dataParse=localStorage.getItem('logInUsers');
-    if (this.dataParse !== null) {
-      this.LogInUsers = JSON.parse(this.dataParse);
-      if(this.LogInUsers){
-      this.router.navigate(['/app-add-task'])
+    var loginUserData = this.Users.find(
+      (x) => x.email == data.email && x.password == data.password
+    );
+
+    if (loginUserData) {
+      this.loginUser = loginUserData;
+      localStorage.setItem('logInUser', JSON.stringify(this.loginUser));
+      this.router.navigate(['/app-add-task']);
+    } else {
+      alert('Please enter valid email and Password');
     }
-  }
-  }
-  createRegistrationForm(){
-    this.signForm = new FormGroup({
-      "firstName":new FormControl('',[Validators.required,Validators.minLength(2),Validators.maxLength(10),Validators.pattern("[a-zA-Z]{2,10}")]),
-      "email":new FormControl('',Validators.required,[]),
-      "password":new FormControl('',Validators.required,[]),
-
-    })
-  }
-  
- 
-  save(){
-    console.log("form data",this.signForm.value);
+    this.resetloginForm();
   }
 
-  get firstName (){
-    return this.signForm.controls['firstName'];
+  resetloginForm() {
+    // this.loginForm.reset();
+  }
 
+  resetSignupForm() {
+    // this.signForm.reset();
   }
-  get email (){
-    return this.signForm.controls['email']
-  }
-  get password (){
-    return this.signForm.controls['password']
-  }
-  
- 
+  // createRegistrationForm() {
+  //   this.signForm = new FormGroup({
+  //     name: new FormControl('', [Validators.required]),
+  //     email: new FormControl('', Validators.required, []),
+  //     password: new FormControl('', Validators.required, []),
+  //   });
+  // }
+
+  // get name() {
+  //   return this.signForm.controls['name'];
+  // }
+  // get email() {
+  //   return this.signForm.controls['email'];
+  // }
+  // get password() {
+  //   return this.signForm.controls['password'];
+  // }
 }
 
-class signUp {
+export class User {
   name!: string;
   email!: string;
   password!: string;
-  get: any;
-  controls: any;
+  tasks!: Task[];
 }
+
 class logIn {
   email!: string;
   password!: string;

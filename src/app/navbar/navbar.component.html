@@ -1,0 +1,10 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+
+        <a class="navbar-brand fs-2" routerLink="/">Task Manager</a>
+        <div class="topnav-right">
+            <a class="nav-link active home" aria-current="page" routerLink=''>{{loginUser.name|titlecase}}</a>
+            <a class="nav-link active" aria-current="page" (click)="logOut()">logOut</a>
+        </div>
+    </div>
+</nav>
