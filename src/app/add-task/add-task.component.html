@@ -1,0 +1,27 @@
+<h3 class="text-center">Add New Task</h3>
+<p class="messege-p"></p>
+<div class="task-add">
+    <form>
+        <div class="form-group">
+            <label for="">Task Name</label>
+            <input type="text" class="form-control" id="id1" placeholder="enter task name" name="taskname"
+                [(ngModel)]="taskAddObj.taskName">
+        </div>
+        <div class="form-group">
+            <label for="">Description</label>
+            <input type="text" class="form-control" id="id2" placeholder="enter description " name="description"
+                [(ngModel)]="taskAddObj.description">
+        </div>
+        <div class="form-group">
+            <label for="">Due Date </label>
+            <input type="date" class="form-control" id="id3" placeholder="enter due date" name="duedate"
+                [(ngModel)]="taskAddObj.dueDate">
+        </div>
+        <div class="form-group">
+            <label for="id4">Satatus </label>
+            <input type="text" class="form-control" id="id4" placeholder="enter status " name="status"
+                [(ngModel)]="taskAddObj.status">
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="createnewtask()">Add Task</button>
+    </form>
+</div>

@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="row">
+        <div class="task-list col-lg-8">
+           
+
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12 mb-3 mb-lg-5">
+                        <div class="position-relative card table-nowrap table-card">
+                            <div class="card-header align-items-center">
+                                <h5 class="mb-0">Task Lists</h5>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead class="small text-uppercase bg-body text-muted">
+                                        <tr>
+                                            <th>Task ID</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="align-middle" *ngFor="let task of taskList">
+                                            <td> {{task.id}}</td>
+                                            <td>{{task.taskName}}</td>
+                                            <td>{{task.description}}</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+                                                    <span>{{task.dueDate | date:'dd/MM/yyyy'}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span
+                                                    [ngClass]="task.status == 'Pending' ? 'badge fs-6 fw-normal bg-tint-warning text-warning':'badge fs-6 fw-normal bg-tint-success text-success'">
+                                                    {{task.status}}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-footer text-end">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-4">
+            <app-add-task></app-add-task>
+        </div>
+    </div>
+</div>

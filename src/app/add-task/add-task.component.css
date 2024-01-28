@@ -1,0 +1,14 @@
+.task-add {
+  background-color: azure;
+}
+.btn {
+  width: 100%;
+  margin-top: 6px;
+  padding: 2px;
+  background-color: pink;
+}
+.messege-p {
+  color: rgb(24, 172, 24);
+  font-size: 20px;
+  text-align: center;
+}

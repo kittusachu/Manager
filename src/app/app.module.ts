@@ -3,16 +3,27 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SigninComponent } from './signin/signin.component';
+import { TaskListComponent } from './task-list/task-list.component';
+import { AddTaskComponent } from './add-task/add-task.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SigninComponent,
+    TaskListComponent,
+    AddTaskComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
-  ],
+     AppRoutingModule,
+      FormsModule,
+      HttpClientModule,
+      ReactiveFormsModule
+    ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
