@@ -9,16 +9,18 @@ import { Task } from '../add-task/add-task.component';
   styleUrls: ['./signin.component.css'],
 })
 export class SigninComponent implements OnInit {
-  // signForm!: FormGroup;
   showLogin: boolean = true;
   Users: User[] = [];
-  signUpForm!: User;
-  dataParse: string | null = '';
-  LogInUsers: any[] = [];
-  // loginForm!: FormGroup;
   loginUser!: User;
+  loginFormData: logIn;
+  signFormData: User;
+
+  signForm!: FormGroup;
+  loginValidationForm!: FormGroup;
 
   constructor(private router: Router) {
+    this.loginFormData = new logIn();
+    this.signFormData = new User();
     var loginData = localStorage.getItem('logInUser');
     if (loginData) {
       this.router.navigate(['/app-add-task']);
@@ -30,7 +32,8 @@ export class SigninComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.createRegistrationForm();
+    this.createRegistrationForm();
+    this.createLoginForm();
   }
 
   openlogin() {
@@ -41,22 +44,19 @@ export class SigninComponent implements OnInit {
     this.showLogin = false;
   }
 
-  signUp(data: User) {
-    var userData: User = {
-      email: data.email,
-      name: data.name,
-      password: data.password,
-      tasks: [],
-    };
-    this.Users.push(userData);
+  signUp() {
+    this.Users.push(this.signFormData);
     localStorage.setItem('Users', JSON.stringify(this.Users));
-    this.resetSignupForm();
+    // this.resetSignupForm();
+    alert('User register');
     this.openlogin();
   }
 
-  logIn(data: logIn) {
+  logIn() {
     var loginUserData = this.Users.find(
-      (x) => x.email == data.email && x.password == data.password
+      (x) =>
+        x.email == this.loginFormData.email &&
+        x.password == this.loginFormData.password
     );
 
     if (loginUserData) {
@@ -69,30 +69,44 @@ export class SigninComponent implements OnInit {
     this.resetloginForm();
   }
 
+  createRegistrationForm() {
+    this.signForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      password: new FormControl('', Validators.required, []),
+    });
+  }
+  get name() {
+    return this.signForm.controls['name'];
+  }
+  get email() {
+    return this.signForm.controls['email'];
+  }
+  get password() {
+    return this.signForm.controls['password'];
+  }
+
+  createLoginForm() {
+    this.loginValidationForm = new FormGroup({
+      loginEmail: new FormControl('', Validators.required, []),
+      loginPassword: new FormControl('', Validators.required, []),
+    });
+  }
+  get loginEmail() {
+    return this.loginValidationForm.controls['loginEmail'];
+  }
+  get loginPassword() {
+    return this.loginValidationForm.controls['loginPassword'];
+  }
+
   resetloginForm() {
-    // this.loginForm.reset();
+    this.loginFormData.email = '';
+    this.loginFormData.password = '';
   }
 
   resetSignupForm() {
-    // this.signForm.reset();
+    this.signForm.reset();
   }
-  // createRegistrationForm() {
-  //   this.signForm = new FormGroup({
-  //     name: new FormControl('', [Validators.required]),
-  //     email: new FormControl('', Validators.required, []),
-  //     password: new FormControl('', Validators.required, []),
-  //   });
-  // }
-
-  // get name() {
-  //   return this.signForm.controls['name'];
-  // }
-  // get email() {
-  //   return this.signForm.controls['email'];
-  // }
-  // get password() {
-  //   return this.signForm.controls['password'];
-  // }
 }
 
 export class User {
